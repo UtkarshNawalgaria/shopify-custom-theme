@@ -1,0 +1,18 @@
+{
+  "name": "template-minimal",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "adastra dev -s utkarsh-developer-preview.myshopify.com",
+    "build": "adastra build",
+    "preview": "adastra preview",
+    "check": "adastra check"
+  },
+  "devDependencies": {
+    "adastra-cli": "latest",
+    "adastra-plugin": "latest",
+    "@shopify/cli": "latest",
+    "@shopify/theme": "latest",
+    "vite": "^4.1.4"
+  }
+}
