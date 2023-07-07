@@ -27,6 +27,7 @@
     {% liquid
       render 'colors'
       render 'typography'
+      render 'layout'
     %}
 
     <script>
@@ -39,7 +40,7 @@
 
     {% liquid
       # Always add entrypoint below content_for_header
-      render 'adastra' with 'base.css'
+      render 'adastra' with 'css/base.css'
       render 'adastra' with 'index.js'
     %}
   </head>
@@ -61,5 +62,6 @@
         product_recommendations_url: '{{ routes.product_recommendations_url }}'
       }
     </script>
+    <script type="application/json" id="moneyFormat">{{ shop.money_format | json }}</script>
   </body>
 </html>

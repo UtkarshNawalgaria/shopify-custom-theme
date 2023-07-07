@@ -4,8 +4,30 @@
     "theme_name": "Adastra",
     "theme_version": "0.0.0",
     "theme_author": "You Astronaut",
-    "theme_documentation_url": "https://docs.blanklob.com",
-    "theme_support_url": "https://help.blanklob.com"
+    "theme_documentation_url": "https:\/\/docs.blanklob.com",
+    "theme_support_url": "https:\/\/help.blanklob.com"
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "container_width",
+        "min": 1200,
+        "max": 1600,
+        "step": 40,
+        "unit": "px",
+        "label": "Max Container Width",
+        "default": 1280
+      },
+      {
+        "type": "text",
+        "id": "section_vertical_padding",
+        "label": "Section Vertical Padding",
+        "default": "30",
+        "info": "Padding unit used is 'px'"
+      }
+    ]
   },
   {
     "name": "Brand",
@@ -38,55 +60,69 @@
       },
       {
         "type": "header",
+        "content": "Buttons"
+      },
+      {
+        "type": "range",
+        "id": "button_radius",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Button Radius",
+        "default": 5
+      },
+      {
+        "type": "header",
         "content": "Social links"
       },
       {
         "type": "url",
         "id": "social_instagram_link",
         "label": "Instagram",
-        "info": "https://instagram.com/shopify"
+        "info": "https:\/\/instagram.com\/shopify"
       },
       {
         "type": "url",
         "id": "social_tiktok_link",
         "label": "Tiktok",
-        "info": "https://tiktok.com/@shopify"
+        "info": "https:\/\/tiktok.com\/@shopify"
       },
       {
         "type": "url",
         "id": "social_facebook_link",
         "label": "Facebook",
-        "info": "https://facebook.com/shopify"
+        "info": "https:\/\/facebook.com\/shopify"
       },
       {
         "type": "url",
         "id": "social_pinterest_link",
         "label": "Pinterest",
-        "info": "https://pinterest.com/shopify"
+        "info": "https:\/\/pinterest.com\/shopify"
       },
       {
         "type": "url",
         "id": "social_twitter_link",
         "label": "Twitter",
-        "info": "https://twitter.com/shopify"
+        "info": "https:\/\/twitter.com\/shopify"
       },
       {
         "type": "url",
         "id": "social_youtube_link",
         "label": "Youtube",
-        "info": "https://www.youtube.com/@shopify"
+        "info": "https:\/\/www.youtube.com\/@shopify"
       },
       {
         "type": "url",
         "id": "social_linkedin_link",
         "label": "Linkedin",
-        "info": "https://linkedin.com/company/shopify"
+        "info": "https:\/\/linkedin.com\/company\/shopify"
       },
       {
         "type": "url",
         "id": "social_vimeo_link",
         "label": "Vimeo",
-        "info": "https://vimeo.com/shopify"
+        "info": "https:\/\/vimeo.com\/shopify"
       }
     ]
   },
@@ -161,7 +197,7 @@
         "id": "type_heading",
         "default": "inter_n7",
         "label": "Font",
-        "info": "Selecting a different font can affect the speed of your store. [Learn more about system fonts.](https://help.shopify.com/en/manual/online-store/os/store-speed/improving-speed#fonts)"
+        "info": "Selecting a different font can affect the speed of your store. [Learn more about system fonts.](https:\/\/help.shopify.com\/en\/manual\/online-store\/os\/store-speed\/improving-speed#fonts)"
       },
       {
         "type": "header",
@@ -172,7 +208,7 @@
         "id": "type_body",
         "default": "inter_n4",
         "label": "Font",
-        "info": "Selecting a different font can affect the speed of your store. [Learn more about system fonts.](https://help.shopify.com/en/manual/online-store/os/store-speed/improving-speed#fonts)"
+        "info": "Selecting a different font can affect the speed of your store. [Learn more about system fonts.](https:\/\/help.shopify.com\/en\/manual\/online-store\/os\/store-speed\/improving-speed#fonts)"
       }
     ]
   },
@@ -189,6 +225,37 @@
         "label": "Show currency codes",
         "info": "Cart and checkout prices always show currency codes. Example: $1.00 USD.",
         "default": true
+      }
+    ]
+  },
+  {
+    "name": "Single Product",
+    "settings": [
+      {
+        "type": "select",
+        "label": "Show saved amount",
+        "id": "show_saved_amount",
+        "options": [
+          {
+            "value": "hide",
+            "label": "Hide"
+          },
+          {
+            "value": "amount",
+            "label": "Amount"
+          },
+          {
+            "value": "percentage",
+            "label": "Percentage"
+          }
+        ],
+        "default": "amount"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sale_badge",
+        "label": "Show Sale Badge",
+        "default": false
       }
     ]
   }

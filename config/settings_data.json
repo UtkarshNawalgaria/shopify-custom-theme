@@ -1,6 +1,12 @@
 {
-  "current": {},
+  "current": {
+    "show_saved_amount": "percentage",
+    "content_for_index": [
+
+    ]
+  },
   "presets": {
-    "Default": {}
+    "Default": {
+    }
   }
 }
