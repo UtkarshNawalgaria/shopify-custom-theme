@@ -5,7 +5,41 @@
       "settings": {
         "heading": "Welcome to Adastra ✨"
       }
+    },
+    "shop-the-look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "51ab6364-4748-403a-b121-99d08b576674": {
+          "type": "product-pin",
+          "settings": {
+            "product": "converse-chuck-taylor-all-star-lo",
+            "position-top": 63,
+            "position-left": 25
+          }
+        },
+        "71a33f05-8163-437c-80a2-c6d5245cc1eb": {
+          "type": "product-pin",
+          "settings": {
+            "product": "dr-martens-cavendish-3-eye-shoe-black",
+            "position-top": 64,
+            "position-left": 69
+          }
+        }
+      },
+      "block_order": [
+        "51ab6364-4748-403a-b121-99d08b576674",
+        "71a33f05-8163-437c-80a2-c6d5245cc1eb"
+      ],
+      "settings": {
+        "heading": "Shop The Look",
+        "align_heading": "left",
+        "main_image": "shopify:\/\/shop_images\/husband-and-wife-shoes.jpg",
+        "show_as_carousel": true
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "shop-the-look"
+  ]
 }

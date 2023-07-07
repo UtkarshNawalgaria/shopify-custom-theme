@@ -1,0 +1,190 @@
+{% liquid
+  assign se_settings = section.settings
+%}
+
+<shop-the-look
+  class="container"
+  data-section-type="shop-the-look"
+  id="shop-the-look"
+>
+  <h2 class="section-title text-{{ se_settings.align_heading }}">{{ se_settings.heading }}</h2>
+  <div class="image-block">
+    <div>
+      {% if se_settings.main_image != blank %}
+        {{ se_settings.main_image | image_url: width: 1280, height: 600 | image_tag: class: 'main-image' }}
+      {% endif %}
+      {% for block in section.blocks %}
+        <div class="pin" data-block-id="{{ block.id }}"></div>
+      {% endfor %}
+    </div>
+    <div class="product-list">
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+        <div class="product hide" data-block-id="{{ block.id }}">
+          <div class="product-image">
+            {{ product.featured_image | image_url: width: 150 | image_tag }}
+          </div>
+          <div class="product-meta">
+            <div class="product-title">{{ product.title }}</div>
+            <div class="product-price">{{ product.price | money_with_currency }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</shop-the-look>
+
+{% stylesheet %}
+
+{% endstylesheet %}
+
+<style>
+  shop-the-look {
+    display: block;
+  }
+
+  #shop-the-look .image-block {
+    position: relative;
+  }
+
+  #shop-the-look .main-image {
+    max-width: 100%;
+    border-radius: 5px;
+  }
+
+  #shop-the-look .pin {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: blueviolet;
+  }
+
+  #shop-the-look .product {
+    background-color: white;
+    max-width: 200px;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0rem 0.25rem 1.125rem -0.125rem #1f212414,0rem 0.75rem 1.125rem -0.125rem #1f212426;
+  }
+
+  #shop-the-look .product img {
+    border-radius: 5px;
+  }
+
+  #shop-the-look .product .product-meta {
+    margin-top: 10px;
+    display: grid;
+    gap: 10px;
+  }
+
+  {% for block in section.blocks %}
+    #shop-the-look [data-block-id="{{ block.id }}"].pin {
+      position: absolute;
+      cursor: pointer;
+      top: {{ block.settings.position-top }}%;
+      left: {{ block.settings.position-left }}%;
+      z-index: 2;
+    }
+
+    #shop-the-look [data-block-id="{{ block.id }}"].pin::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      display: block;
+      background-color: #ffffff80;
+      border-radius: 50%;
+      backface-visibility: hidden;
+      z-index: 1;
+    }
+
+    #shop-the-look [data-block-id="{{ block.id }}"].product {
+      position: absolute;
+      top: calc({{ block.settings.position-top }}% + 5%);
+      left: calc({{ block.settings.position-left }}% - 5%);
+      top: {{ block.settings.position-top }}%;
+      margin-top: 40px;
+    }
+  {% endfor %}
+</style>
+
+{% schema %}
+{
+  "name": "Shop the Look",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Heading",
+      "id": "heading",
+      "default": "Shop The Look"
+    },
+    {
+      "type": "select",
+      "id": "align_heading",
+      "label": "Heading Alignment",
+      "default": "left",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Shop the Look Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_as_carousel",
+      "label": "Show as Carousel"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Product and Pin",
+      "type": "product-pin",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "header",
+          "content": "Pin Position"
+        },
+        {
+          "type": "range",
+          "label": "Position From Top",
+          "default": 0,
+          "id": "position-top",
+          "min": 0,
+          "max": 100,
+          "unit": "%",
+          "step": 1
+        },
+        {
+          "type": "range",
+          "label": "Position From Left",
+          "default": 0,
+          "id": "position-left",
+          "min": 0,
+          "max": 100,
+          "unit": "%",
+          "step": 1
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
