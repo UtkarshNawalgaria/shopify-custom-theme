@@ -1,0 +1,9 @@
+<div id="quantity-selector">
+  <div class="qty-block">
+    <button class="qty-btn decrement" type="button">-</button>
+    <div class="qty-input">
+      <input type="number" name="quantity" id="Product-{{ product.id }}-qty" min="1" max="{{ current_variant.inventory_quantity }}" value="1">
+    </div>
+    <button class="qty-btn increment" type="button">+</button>
+  </div>
+</div>

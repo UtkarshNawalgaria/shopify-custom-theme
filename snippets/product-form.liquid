@@ -1,0 +1,16 @@
+<div id="product-form">
+  {% form 'product', product %}
+
+    {% if block.settings.show_quantity_selector %}
+      {% render 'quantity-selector', product: product, current_variant: current_variant %}
+    {% endif %}
+
+    <input type="hidden" name="id" value="{{ current_variant.id }}">
+    <div class="payment-buttons">
+      <input id="add-to-cart" class="btn btn-full" type="submit" value="Add to Cart">
+      {% if block.settings.show_dynamic_checkout_button %}
+        {{ form | payment_button }}
+      {% endif %}
+    </div>
+  {% endform %}
+</div>

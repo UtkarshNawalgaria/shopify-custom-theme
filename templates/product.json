@@ -1,8 +1,73 @@
 {
   "sections": {
     "main": {
-      "type": "hello-world"
+      "type": "main-product",
+      "blocks": {
+        "542ce8be-6f63-4105-9d25-5b56c9dd8b3a": {
+          "type": "product_title",
+          "settings": {
+          }
+        },
+        "a2f5fc4f-a3e1-4543-a107-25ac397043bc": {
+          "type": "product_sku",
+          "settings": {
+            "show_sku": true,
+            "show_vendor": true
+          }
+        },
+        "40d99310-268e-42e3-83e8-051c2923c503": {
+          "type": "product_price",
+          "settings": {
+            "show_tax_shipping_info": true
+          }
+        },
+        "7e8c1fd2-2373-48f5-8015-3710395b8f64": {
+          "type": "product_description",
+          "settings": {
+          }
+        },
+        "d95b9fef-8bf8-4bd6-b033-504143a07848": {
+          "type": "divider",
+          "settings": {
+          }
+        },
+        "59bd51bf-cf5c-4825-b162-ea37d8f98234": {
+          "type": "variant_selector",
+          "settings": {
+            "variant_selector": "dropdown"
+          }
+        },
+        "d95b9fef-8bf8-4bd6-b033-504143a07849": {
+          "type": "divider",
+          "settings": {
+          }
+        },
+        "97ecc28a-524a-4c3b-92b9-d052a67800de": {
+          "type": "product_form",
+          "settings": {
+            "show_quantity_selector": true
+          }
+        }
+      },
+      "block_order": [
+        "542ce8be-6f63-4105-9d25-5b56c9dd8b3a",
+        "a2f5fc4f-a3e1-4543-a107-25ac397043bc",
+        "40d99310-268e-42e3-83e8-051c2923c503",
+        "7e8c1fd2-2373-48f5-8015-3710395b8f64",
+        "d95b9fef-8bf8-4bd6-b033-504143a07848",
+        "59bd51bf-cf5c-4825-b162-ea37d8f98234",
+        "d95b9fef-8bf8-4bd6-b033-504143a07849",
+        "97ecc28a-524a-4c3b-92b9-d052a67800de"
+      ],
+      "settings": {
+        "gallery_size": "small",
+        "thumbnail_position": "left",
+        "show_thumbnail_on_mobile": false,
+        "show_size_chart": true
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

@@ -1,0 +1,21 @@
+<product-gallery class="product-single__gallery" data-thumbnail-position="{{ thumbnail_position }}">
+  <div class="media-list">
+    {% for media in product.media %}
+      <div data-media-id="{{ media.id }}" class="{% if forloop.index != 1 %}hide {% endif %}media-list__item">
+        {{ media | image_url: width: 650 | image_tag: alt: product.featured_image.alt }}
+      </div>
+    {% endfor %}
+  </div>
+  {% if product.media.size > 1 %}
+    <div class="product-thumbnails">
+      {% for media in product.media %}
+        <div
+          class="thumbnail"
+          data-thumbnail-id="{{ media.id }}"
+          data-active="{% if forloop.index != 1 %}false{%  else %}true{% endif %}">
+          {{ media | image_url: width: 80 | image_tag }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</product-gallery>

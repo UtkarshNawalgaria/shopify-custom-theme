@@ -1,0 +1,56 @@
+{% liquid
+  assign price = variant.price
+  assign compare_at_price = variant.compare_at_price
+
+  if compare_at_price == blank and product.compare_at_price != blank
+    assign compare_at_price = product.compare_at_price
+  endif
+
+  assign on_sale = false
+  if compare_at_price != blank
+    assign on_sale = true
+  endif
+
+  if on_sale == true
+    assign saved_amount = compare_at_price | minus: price
+    assign saved_percentage = saved_amount | times: 100.0 | divided_by: compare_at_price | round
+  endif
+%}
+
+<div class="product-price" data-saved-amount-type="{{ settings.show_saved_amount }}">
+  {% if on_sale == false %}
+    <div class="product-price__regular">
+      <span class="amount">
+        {{ price | money_with_currency }}
+      </span>
+    </div>
+  {% else %}
+    <div class="product-price__sale">
+      <div class="amount">{{ price | money_with_currency }}</div>
+      <div class="compare-amount">{{ compare_at_price | money_with_currency }}</div>
+      {% if settings.show_saved_amount != 'hide' %}
+        <div class="savings">
+          {% if settings.show_saved_amount == 'amount' %}
+            {{ saved_amount | money_with_currency }}
+          {% elsif settings.show_saved_amount == 'percentage' %}
+            {{ saved_percentage }}%
+          {% endif %}
+          off
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<template id="price-regular">
+  <div class="product-price__regular">
+    <span class="amount"></span>
+  </div>
+</template>
+<template id="price-sale">
+  <div class="product-price__sale">
+    <div class="amount"></div>
+    <div class="compare-amount"></div>
+    <div class="savings"></div>
+  </div>
+</template>

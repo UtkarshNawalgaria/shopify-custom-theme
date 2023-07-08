@@ -1,0 +1,47 @@
+<variant-selector data-url="{{ product.url }}">
+  {% for option in product.options_with_values %}
+    {% liquid
+      assign is_size_option = false
+      if option.name == "Size" or option.name == "size"
+        assign is_size_option = true
+      endif
+
+      assign show_size_chart = false
+      if is_size_option == true and section.settings.show_size_chart == true
+        assign show_size_chart = true
+      endif
+    %}
+
+    <fieldset class="option-selector">
+      {% assign index = forloop.index | minus: 1 %}
+
+      <div class="option-selector__label">
+        <legend>{{ option.name }}</legend>
+        {% if show_size_chart %}
+          <span class="size-chart__trigger">Size Chart</span>
+        {% endif %}
+      </div>
+
+      <div class="option-selector__btns">
+        {% for value in option.values %}
+          {% assign option_id = "option-" | append: option.name | downcase | append: "-" | append: value %}
+          {% assign variant_available = product.variants[forloop.index0].available %}
+          <div class="option-value">
+            <input
+              type="radio"
+              name="{{ option.name }}"
+              id="{{ option_id }}"
+              value="{{ value }}"
+              {% if current_variant.options[index] == value %}checked{% endif %}
+              {% if variant_available == false %}disabled{% endif %}
+            >
+            <label for="{{ option_id }}">{{ value }}</label>
+          </div>
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% endfor %}
+  <script type="application/json">
+    {{ product | json }}
+  </script>
+</variant-selector>

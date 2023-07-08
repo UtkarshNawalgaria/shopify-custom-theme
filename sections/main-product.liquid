@@ -1,0 +1,257 @@
+{% liquid
+  assign thumbnail_position = section.settings.thumbnail_position
+  assign current_variant = product.selected_or_first_available_variant
+%}
+
+{% render 'adastra' with 'css/product.css' %}
+
+<component-product
+  id="MainProduct-{{ section.id }}"
+  class="container"
+  data-section-type="product"
+  data-section="{{ section.id }}"
+  data-product-handle="{{ product.handle }}"
+  data-product-id="{{ product.id }}"
+  data-product-sku="{{ current_variant.sku }}">
+  <div class="product">
+    {% render 'product-gallery', product: product, thumbnail_position: thumbnail_position %}
+    <div class="product-single__meta">
+      {% unless section.blocks.size == 0 %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'product_title' %}
+            <div class="product-block">
+              <h1 class="product-single__title">{{ product.title | capitalize }}</h1>
+            </div>
+            {% when 'product_sku' %}
+            {% liquid
+                assign show_data = false
+                assign sku_vendor_value = blank
+                if block.settings.show_vendor and block.settings.show_sku
+                  assign sku_vendor_value = sku_vendor_value | append: product.vendor | append: " |" | append: ' SKU: ' | append: current_variant.sku
+                elsif block.settings.show_vendor == true
+                  assign sku_vendor_value = product.vendor
+                elsif block.settings.show_sku == true
+                  assign sku_vendor_value = current_variant.sku
+                endif
+
+                if sku_vendor_value != blank
+                  assign show_data = true
+                endif
+              %}
+            {% if show_data %}
+              <div class="product-block product-sku" data-variant-id="{{ current_variant.id }}">
+                <span>{{ sku_vendor_value }}</span>
+              </div>
+            {% endif %}
+            {% when 'product_price' %}
+            <div class="product-block">
+              {% render 'product-price', variant: current_variant, product: product %}
+            </div>
+            {% when 'product_description' %}
+            <div class="product-block product-description">
+              {{ product.description }}
+            </div>
+            {% when 'divider' %}
+            <div class="product-block">
+              <hr>
+            </div>
+            {% when 'variant_selector' %}
+            <div class="product-block">
+              {% unless product.has_only_default_variant %}
+                {% render 'variant-selector',
+                  section: section,
+                  block: block,
+                  product: product,
+                  current_variant: current_variant
+                %}
+            {% endunless %}
+            </div>
+            {% when 'product_form' %}
+            <div class="product-block">
+              {% render 'product-form',
+                block: block,
+                product: product,
+                current_variant: current_variant
+              %}
+            </div>
+          {% endcase %}
+        {% endfor %}
+      {% endunless %}
+    </div>
+  </div>
+</component-product>
+
+<style>
+  {% if section.settings.show_thumbnail_on_mobile == false %}
+    @media screen and (max-width: 768px) {
+      .product-single__gallery[data-thumbnail-position] .product-thumbnails {
+        display: none;
+      }
+    }
+  {% endif %}
+</style>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "gallery_size",
+      "label": "Gallery Size",
+      "options": [
+        {
+          "label": "Small",
+          "value": "small"
+        },
+        {
+          "label": "Medium",
+          "value": "medium"
+        },
+        {
+          "label": "Large",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "thumbnail_position",
+      "label": "Thumbnail Position",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "label": "Show thumbnails on Mobile",
+      "id": "show_thumbnail_on_mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Variant Picker"
+    },
+    {
+      "type": "checkbox",
+      "label": "Show Size Chart",
+      "id": "show_size_chart",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "label": "Size Chart",
+      "id": "size_chart",
+      "info": "Size chart will only be used if 'Show Size Cart' is true"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_title",
+      "name": "Product Title",
+      "limit": 1
+    },
+    {
+      "type": "product_sku",
+      "name": "Product SKU/Vendor",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_sku",
+          "label": "Show SKU",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vendor",
+          "label": "Show Vendor",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "product_price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_tax_shipping_info",
+          "label": "Show tax and shipping information",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "product_description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "variant_selector",
+      "name": "Variant Selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "Selector style",
+          "id": "variant_selector",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            },
+            {
+              "value": "buttons",
+              "label": "Buttons"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider"
+    },
+    {
+      "type": "product_form",
+      "name": "Product Form",
+      "settings": [
+        {
+          "type": "checkbox",
+          "label": "Show Quantity Selector",
+          "id": "show_quantity_selector",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "label": "Show Dynamic Checkout Button",
+          "id": "show_dynamic_checkout_button",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ]
+}
+{% endschema %}
