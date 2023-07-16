@@ -2,6 +2,9 @@ export default class VariantSelector extends HTMLElement {
   constructor() {
     super();
 
+    this.productSection = this.closest("component-product");
+    this.form = this.productSection.querySelector("form");
+
     this.optionSelectors = this.querySelectorAll(".option-selector");
     this.productData = JSON.parse(
       this.querySelector('[type="application/json"]').textContent
@@ -29,6 +32,7 @@ export default class VariantSelector extends HTMLElement {
       this.updateURL();
       this.updateSKU();
       this.updatePrice();
+      this.updateSelectedOption();
 
       this.dispatchEvent(
         new CustomEvent("on:variant:change", {
@@ -48,6 +52,12 @@ export default class VariantSelector extends HTMLElement {
     });
 
     return selectedOptions;
+  }
+
+  updateSelectedOption() {
+    this.querySelectorAll(".option-selector__label").forEach((ele, index) => {
+      ele.querySelector(".selected-option").textContent = this.selectedVariant.options[index];
+    })
   }
 
   updateSKU() {

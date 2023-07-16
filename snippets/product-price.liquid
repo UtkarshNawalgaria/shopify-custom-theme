@@ -21,17 +21,17 @@
   {% if on_sale == false %}
     <div class="product-price__regular">
       <span class="amount">
-        {{ price | money_with_currency }}
+        {{ price | money_without_trailing_zeros }}
       </span>
     </div>
   {% else %}
     <div class="product-price__sale">
-      <div class="amount">{{ price | money_with_currency }}</div>
-      <div class="compare-amount">{{ compare_at_price | money_with_currency }}</div>
+      <div class="amount">{{ price | money_without_trailing_zeros }}</div>
+      <div class="compare-amount">{{ compare_at_price | money_without_trailing_zeros }}</div>
       {% if settings.show_saved_amount != 'hide' %}
         <div class="savings">
           {% if settings.show_saved_amount == 'amount' %}
-            {{ saved_amount | money_with_currency }}
+            {{ saved_amount | money_without_trailing_zeros }}
           {% elsif settings.show_saved_amount == 'percentage' %}
             {{ saved_percentage }}%
           {% endif %}

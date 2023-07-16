@@ -1,16 +1,31 @@
 <div id="product-form">
-  {% form 'product', product %}
+  {% assign form_id = "AddToCartForm-" | append: product.id %}
+  {% form 'product', product, id: form_id %}
 
     {% if block.settings.show_quantity_selector %}
       {% render 'quantity-selector', product: product, current_variant: current_variant %}
     {% endif %}
 
-    <input type="hidden" name="id" value="{{ current_variant.id }}">
-    <div class="payment-buttons">
-      <input id="add-to-cart" class="btn btn-full" type="submit" value="Add to Cart">
+    <input
+      type="hidden"
+      name="id"
+      value="{{ current_variant.id }}">
+    <div class="payment-buttons{% if current_variant.available == false %} hide{% endif %}">
+      <input
+        id="add-to-cart"
+        class="btn btn-full"
+        type="submit"
+        value="Add to Cart">
       {% if block.settings.show_dynamic_checkout_button %}
         {{ form | payment_button }}
       {% endif %}
     </div>
+    <div class="sold-out-button{% if current_variant.available %} hide{% endif %}">
+      <button type="button">Out of Stock</button>
+    </div>
   {% endform %}
 </div>
+
+<script>
+  console.log({{ product.variants | json }})
+</script>

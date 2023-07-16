@@ -16,7 +16,7 @@
       {% assign index = forloop.index | minus: 1 %}
 
       <div class="option-selector__label">
-        <legend>{{ option.name }}</legend>
+        <legend>{{ option.name }} - <span class="selected-option">{{ current_variant.options[forloop.index0] }}</span></legend>
         {% if show_size_chart %}
           <span class="size-chart__trigger">Size Chart</span>
         {% endif %}
@@ -32,8 +32,8 @@
               name="{{ option.name }}"
               id="{{ option_id }}"
               value="{{ value }}"
+              class="{% if variant_available == false %}disabled{% endif %}"
               {% if current_variant.options[index] == value %}checked{% endif %}
-              {% if variant_available == false %}disabled{% endif %}
             >
             <label for="{{ option_id }}">{{ value }}</label>
           </div>

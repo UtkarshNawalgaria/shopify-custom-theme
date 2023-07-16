@@ -1,4 +1,4 @@
-<div id="quantity-selector">
+<div id="quantity-selector" class="{% if current_variant.available == false %}hide{% endif %}">
   <div class="qty-block">
     <button class="qty-btn decrement" type="button">-</button>
     <div class="qty-input">

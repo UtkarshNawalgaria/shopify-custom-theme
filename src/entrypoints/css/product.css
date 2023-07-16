@@ -1,5 +1,6 @@
 component-product {
   display: block;
+  padding-top: 20px;
 }
 
 .product {
@@ -62,7 +63,6 @@ component-product {
 
 .product-thumbnails .thumbnail img {
   object-fit: contain;
-  height: 100%;
 }
 
 .product-thumbnails .thumbnail[data-active="true"] {
@@ -142,7 +142,7 @@ variant-selector .option-selector__btns .option-value {
 variant-selector .option-selector__btns .option-value input[type="radio"] {
   height: 1px;
   width: 1px;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   overflow: hidden;
   position: absolute;
   left: 0;
@@ -152,12 +152,20 @@ variant-selector .option-selector__btns .option-value + label {
   position: relative;
 }
 
-variant-selector .option-selector__btns .option-value input[type="radio"]:checked + label {
+variant-selector
+  .option-selector__btns
+  .option-value
+  input[type="radio"]:checked
+  + label {
   background-color: hsla(var(--color-accent) / 0.8);
   color: white;
 }
 
-variant-selector .option-selector__btns .option-value input[type="radio"]:disabled + label {
+variant-selector
+  .option-selector__btns
+  .option-value
+  input[type="radio"]:disabled
+  + label {
   background-color: hsla(var(--color-accent) / 0.4);
   color: white;
 }
