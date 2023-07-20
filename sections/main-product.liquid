@@ -9,19 +9,32 @@
   id="MainProduct-{{ section.id }}"
   class="container"
   data-section-type="product"
+  data-product
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-product-handle="{{ product.handle }}"
-  data-product-sku="{{ current_variant.sku }}">
+  data-product-sku="{{ current_variant.sku }}"
+>
   <div class="product">
-    {% render 'product-gallery', product: product, thumbnail_position: thumbnail_position %}
+    {% render 'product-gallery',
+      product: product,
+      thumbnail_position: thumbnail_position,
+      settings: section.settings
+    %}
     <div class="product-single__meta">
       {% unless section.blocks.size == 0 %}
         {% for block in section.blocks %}
           {% case block.type %}
             {% when 'product_title' %}
-            <div class="product-block">
+            <div class="product-block product-block__title">
               <h1 class="product-single__title">{{ product.title | capitalize }}</h1>
+              <wishlist-icon
+                id="wishlist-icon"
+                data-product-id="{{ product.id }}"
+                data-wishlist="false"
+              >
+                <i class='bx bx-heart bx-sm'></i>
+              </wishlist-icon>
             </div>
             {% when 'product_sku' %}
             {% liquid
@@ -59,21 +72,19 @@
             {% when 'variant_selector' %}
             <div class="product-block">
               {% unless product.has_only_default_variant %}
-                {% render 'variant-selector',
-                  section: section,
-                  block: block,
-                  product: product,
-                  current_variant: current_variant
-                %}
-            {% endunless %}
+                {% render 'variant-selector'
+                 , section: section,
+                 block: block,
+                 product: product,
+                 current_variant: current_variant %}
+              {% endunless %}
             </div>
             {% when 'product_form' %}
             <div class="product-block">
-              {% render 'product-form',
-                block: block,
-                product: product,
-                current_variant: current_variant
-              %}
+              {% render 'product-form'
+               , block: block,
+               product: product,
+               current_variant: current_variant %}
             </div>
           {% endcase %}
         {% endfor %}
@@ -99,7 +110,7 @@
   "settings": [
     {
       "type": "header",
-      "content": "Layout"
+      "content": "Image Gallery"
     },
     {
       "type": "select",
@@ -145,6 +156,22 @@
       "label": "Show thumbnails on Mobile",
       "id": "show_thumbnail_on_mobile",
       "default": true
+    },
+    {
+      "type": "select",
+      "label": "Change thumbnail Image on",
+      "id": "thumbnail_image_change_on",
+      "options": [
+        {
+          "label": "Click",
+          "value": "click"
+        },
+        {
+          "label": "Hover",
+          "value": "hover"
+        }
+      ],
+      "default": "click"
     },
     {
       "type": "header",

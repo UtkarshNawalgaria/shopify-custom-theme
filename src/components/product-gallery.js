@@ -12,7 +12,10 @@ export default class ProductGallery extends HTMLElement {
   }
 
   init() {
-    this.thumbnailContainer.addEventListener("click", event => {
+    const action = this.dataset.changeImageOn || "click";
+
+    this.thumbnailContainer.addEventListener(action, event => {
+      console.log(event.target)
       const selectedThumbnail = event.target.closest('.thumbnail');
       const mediaId = selectedThumbnail.dataset.thumbnailId;
       const activeMedia = this.querySelector(`[data-media-id="${mediaId}"]`);

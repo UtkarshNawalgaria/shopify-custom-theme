@@ -3,6 +3,16 @@ component-product {
   padding-top: 20px;
 }
 
+wishlist-icon {
+  display: block;
+  cursor: pointer;
+
+  .bx-heart,
+  .bxs-heart {
+    color: red;
+  }
+}
+
 .product {
   display: grid;
   gap: 20px;
@@ -13,9 +23,16 @@ component-product {
     margin-bottom: 20px;
   }
 
+  .product-block__title {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+  }
+
   .product-sku {
     margin-bottom: 10px;
-    font-weight: 400;
+    font-weight: 500;
+    font-size: 12px;
   }
 
   .product-price__sale {

@@ -1,4 +1,8 @@
-<product-gallery class="product-single__gallery" data-thumbnail-position="{{ thumbnail_position }}">
+<product-gallery
+  class="product-single__gallery"
+  data-thumbnail-position="{{ thumbnail_position }}"
+  data-change-image-on="{{ settings.thumbnail_image_change_on }}"
+>
   <div class="media-list">
     {% for media in product.media %}
       <div data-media-id="{{ media.id }}" class="{% if forloop.index != 1 %}hide {% endif %}media-list__item">
